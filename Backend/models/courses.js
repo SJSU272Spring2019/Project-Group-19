@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 const courses = new mongoose.Schema({
-  "Career Path": {
+  Careerpath: {
     type: String
   },
   Skill: {
@@ -10,7 +10,7 @@ const courses = new mongoose.Schema({
   Title: {
     type: String
   },
-  "Course Link": {
+  Courselink: {
     type: String
   },
   Certification: {

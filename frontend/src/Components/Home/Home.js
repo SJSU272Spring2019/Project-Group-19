@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import { Carousel, Select, InputNumber, TreeSelect, Icon, Tooltip } from "antd";
-import { Form, Input } from "antd";
+import { Input } from "antd";
 import _ from "lodash";
 import "./Home.css";
 var setEmail = require("../Localstorage").setEmail;

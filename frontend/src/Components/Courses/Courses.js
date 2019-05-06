@@ -1,34 +1,68 @@
-import React, { Component, Row, Col } from "react";
-import { Slider } from "antd";
+import React, { Component } from "react";
+import Axios from "axios";
+import { Link, Route } from "react-router-dom";
+import _ from "lodash";
+import { Slider, List, Avatar, Icon } from "antd";
+import Webpage from "./Webpage";
+var getEmail = require("../Localstorage").getEmail;
+
+let isVisible = false;
 
 class Courses extends Component {
-  state = {
-    inputValue: 1,
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: 1,
+      courses: []
+    };
   }
 
-
-  onChange = (value) => {
-    this.setState({
-      inputValue: value,
+  componentDidMount = () => {
+    console.log("this is email ", getEmail());
+    let data = {
+      email: getEmail()
+    };
+    Axios.post(window.base_url + "/getcourses", data).then(response => {
+      console.log("this is the final ", response.data);
+      this.setState({ courses: response.data });
     });
-  }
+  };
+
+  onChange = value => {
+    this.setState({
+      inputValue: value
+    });
+  };
+
+  handleClick = () => {
+    isVisible = !isVisible;
+  };
+
+  renderCourseList = () => {
+    console.log("inside the render ", this.state.courses);
+    let courses = this.state.courses;
+
+    return _.map(courses, (course, i) => (
+      <div>
+        <a href={`${course.Courselink}`} target="_blank">
+          <li class="list-group-item">{course.Title}</li>
+        </a>
+      </div>
+    ));
+  };
 
   render() {
     const { inputValue } = this.state;
     return (
       <div>
-        Courses
-        <Row>
-        <Col span={12}>
-        <Slider defaultValue={30} tooltipVisible />
-          <Slider
-            min={1}
-            max={20}
-            onChange={this.onChange}
-            value={typeof inputValue === 'number' ? inputValue : 0}
-          />
-        </Col></Row>
-        
+        <div className="row">
+          <div className="col-lg-6">
+            <ul className="list-group">{this.renderCourseList()}</ul>
+          </div>
+          <div className="col-lg-6" >
+            <iframe style={{ width: "500px", height: "700px",backgroundSize:'90%' }} src="https://business.udemy.com/?ref=ufb_header" />
+          </div>
+        </div>
       </div>
     );
   }

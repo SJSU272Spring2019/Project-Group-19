@@ -121,4 +121,67 @@ app.get("/getalldata", async (req, res) => {
   res.json(returnData).status(200);
 });
 
-/* --------------------> Create a user with details <-------------------- */
+/* --------------------> Get courses and its relative courses with details <-------------------- */
+app.post("/getcourses", (req, res) => {
+  console.log("request body received ", req.body);
+  member.findOne({ email: req.body.email }, (err1, memberResults) => {
+    if (err1) {
+      res.status(400).json({ message: "Error in finding the email in member" });
+      console.log("error ", err1);
+    } else {
+      course.find(
+        { Careerpath: memberResults.Role },
+        "Title Courselink",
+        (err2, courseResult) => {
+          if (err2) {
+            console.log(
+              "Error in finding the courses pertaining to CareerPath",
+              err2
+            );
+            res.status(400).json({
+              message: "Error in finding the courses pertaining to CareerPath"
+            });
+          } else {
+            console.log("Result ", courseResult);
+            res.status(200).send(courseResult);
+          }
+        }
+      );
+    }
+  });
+});
+
+/* --------------------> Get skills and its relative courses with details <-------------------- */
+app.post("/getskills", (req, res) => {
+  console.log("request body received ", req.body);
+  member.findOne({ email: req.body.email }, (err1, memberResults) => {
+    if (err1) {
+      res.status(400).json({ message: "Error in finding the email in member" });
+      console.log("error ", err1);
+    } else {
+      console.log("this is result", memberResults);
+      course.find(
+        { Careerpath: memberResults.Role },
+        "Skill",
+        (err2, courseResult) => {
+          if (err2) {
+            console.log("Error in finding the Skills", err2);
+            res.status(400).json({
+              message: "Error in finding the courses pertaining to CareerPath"
+            });
+          } else {
+            let skillset = courseResult.map(e => e.Skill);
+            let otherskills = skillset.filter(
+              f => !memberResults.Skills.includes(f)
+            );
+            let finalData = {
+              presentSkills: memberResults.Skills,
+              neededSkills: otherskills
+            }
+            res.status(200).send(finalData);
+          }
+        }
+      );
+    }
+  });
+});

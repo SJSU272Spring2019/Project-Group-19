@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Menu, Icon } from "antd";
 import "./TopNavbar.css";
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
+var getRole = require("../Localstorage").getRole;
 
 class TopNavbar extends Component {
   state = {};
@@ -15,6 +14,10 @@ class TopNavbar extends Component {
           mode="horizontal"
           theme="dark"
         >
+          <Menu.Item key="title" id="title">
+            <h5 style={{ color: "white" }}>For you to become {getRole() || ""} </h5>
+          </Menu.Item>
+
           <Menu.Item key="login" id="login">
             <Icon type="google" />
             Google Login

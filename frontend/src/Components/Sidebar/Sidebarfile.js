@@ -57,6 +57,14 @@ class Sidebarfile extends Component {
                 <span>Courses For You</span>
               </Link>
             </Menu.Item>
+
+            <Menu.Item key="6">
+              <Link to="/skills">
+                <Icon type="file-done" />
+                <span>Skillset For You</span>
+              </Link>
+            </Menu.Item>
+
             <Menu.Item key="3">
               <Link to="/certification">
                 <Icon type="file-protect" />

@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 const careerPaths = new mongoose.Schema({
-  Career_Path: {
+  CareerPath: {
     type: String
   }
 });

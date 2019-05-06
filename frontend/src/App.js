@@ -7,6 +7,7 @@ import Navbar from "./Components/Navbar/TopNavbar";
 import Certification from "./Components/Certification/Certification";
 import Courses from "./Components/Courses/Courses";
 import Events from "./Components/Events/Events";
+import Skills from "./Components/Skills/Skills";
 import "antd/dist/antd.css";
 import "./App.css";
 import Trending from "./Components/Trending/trending"
@@ -38,6 +39,7 @@ class App extends Component {
                     <Route path="/Trending" component={Trending}/>
                     <Route path="/Line" component={linegraph}/> 
                     <Route path="/line_graph" component ={line_graph}/>
+                    <Route path="/skills" component={Skills} />
                   </Switch>
                 </Layout>
               </div>

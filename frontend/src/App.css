@@ -2,9 +2,43 @@
   margin-left: 100px;
 } */
 
+
 #layoutcontent {
   padding: 10px 35px 24px;
   margin: 10px -75px;
   width: 1200px !important;
   height: 720px;
+}
+
+#listcert{
+  animation: slide-up 1s ease;
+}
+.list-group-item{
+  background: rgb(255, 255, 255);
+  margin: 5px 0px;
+}
+
+a {
+  color: #355a7a;
+}
+
+
+@media(max-width:767px) {
+  .box {
+      width: 100%;
+      margin-right: 0;
+      margin-left: 0;
+  }
+}
+
+
+@keyframes slide-up {
+  0% {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
 }

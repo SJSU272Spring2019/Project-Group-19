@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import Axios from "axios";
-import { Slider, Row, Col } from "antd";
+import { Link, Route } from "react-router-dom";
+import { Slider, Progress } from "antd";
 import _ from "lodash";
-import "./Skills.css"
+import "./Skills.css";
 var getEmail = require("../Localstorage").getEmail;
 
-class Courses extends Component {
+class Skills extends Component {
   state = {
     inputValue: 1,
     presentLength: 1,
@@ -33,7 +34,9 @@ class Courses extends Component {
     let skillsNeeded = this.state.details.neededSkills;
     return _.map(skillsNeeded, (snew, i) => (
       <div>
-        <li class="list-group-item">{snew}</li>
+        <Link to={`/skills/${snew}`}>
+          <li id="listcert" class="list-group-item">{snew}</li>
+        </Link>
       </div>
     ));
   };
@@ -43,7 +46,11 @@ class Courses extends Component {
     let skills = this.state.details.presentSkills;
     return _.map(skills, (skill, i) => (
       <div>
-        <li  style={{transitionDelay:'4s'}} class="list-group-item">{skill}</li>
+        <Link to={`/skills/${skill}`}>
+          <li id="listcert" class="list-group-item">
+            {skill}
+          </li>
+        </Link>
       </div>
     ));
   };
@@ -58,20 +65,30 @@ class Courses extends Component {
     const { inputValue } = this.state;
     return (
       <div>
-        <div className="row-lg-2">
-          <h4>Profile Strength</h4>
-          
-          <Slider
-            id="slidercss"
-            defaultValue={this.state.presentLength}
-            min={1}
-            max={this.state.neededLength}
-            // onChange={this.onChange}
-            // value={typeof inputValue === "number" ? inputValue : 0}
-            value={this.state.presentLength}
+        <div className="row-lg-2" id="topseg">
+          <h4 style={{ display: "inline" }}>Profile Strength : </h4>
+          <h5 style={{ display: "inline" }}>
+            {Math.round(
+              100 *
+                (this.state.presentLength /
+                  (this.state.neededLength + this.state.presentLength))
+            )}
+            %
+          </h5>
+          <Progress
+            strokeColor={{
+              "0%": "#4599d1",
+              "100%": "#659c4d"
+            }}
+            showInfo="false"
+            percent={
+              100 *
+              (this.state.presentLength /
+                (this.state.neededLength + this.state.presentLength))
+            }
           />
         </div>
-        <div className="row">
+        <div className="row" id="bottomseg">
           <div className="col-lg-6">
             <h4>Skills you have</h4>
             {this.renderPresentSkills()}
@@ -86,4 +103,4 @@ class Courses extends Component {
   }
 }
 
-export default Courses;
+export default Skills;

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import Axios from "axios";
-import { Link, Route } from "react-router-dom";
 import _ from "lodash";
 import { Slider, List, Avatar, Icon } from "antd";
-import Webpage from "./Webpage";
+import Webpage from "./SkillCourses";
 var getEmail = require("../Localstorage").getEmail;
 
 let isVisible = false;
@@ -45,7 +44,7 @@ class Courses extends Component {
     return _.map(courses, (course, i) => (
       <div>
         <a href={`${course.Courselink}`} target="_blank">
-          <li class="list-group-item">{course.Title}</li>
+          <li id="listcert" class="list-group-item">{course.Title}</li>
         </a>
       </div>
     ));

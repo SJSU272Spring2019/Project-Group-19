@@ -34,39 +34,38 @@
   margin-bottom: 15px;
 }
 
-#courskill{
-    margin: 10px 10px;
+#courskill {
+  margin: 10px 10px;
 }
 
-#verticalLine{
-width: 1;
-height: 500;
+#verticalLine {
+  width: 1;
+  height: 500;
 }
 
-.ant-divider-dashed{
-    border-top: 2px dashed #235686 !important;
+.ant-divider-dashed {
+  border-top: 2px dashed #235686 !important;
 }
 
-#listcert{
+#listcert {
   animation: slide-up 1s ease;
 }
 
-@media(max-width:767px) {
+@media (max-width: 767px) {
   .box {
-      width: 100%;
-      margin-right: 0;
-      margin-left: 0;
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
   }
 }
 
-
 @keyframes slide-up {
   0% {
-      opacity: 0;
-      transform: translateY(20px);
+    opacity: 0;
+    transform: translateY(20px);
   }
   100% {
-      opacity: 1;
-      transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }

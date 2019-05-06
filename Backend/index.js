@@ -177,7 +177,60 @@ app.post("/getskills", (req, res) => {
             let finalData = {
               presentSkills: memberResults.Skills,
               neededSkills: otherskills
-            }
+            };
+
+            res.status(200).send(finalData);
+          }
+        }
+      );
+    }
+  });
+});
+
+/* --------------------> Get courses for a particular skill <-------------------- */
+app.post("/getcourseforskill", (req, res) => {
+  console.log("request body received ", req.body);
+  course.find({ Skill: req.body.skill }, (err1, courseResult) => {
+    if (err1) {
+      res
+        .status(400)
+        .json({ message: "Error in finding the courses for a skill" });
+      console.log("error ", err1);
+    } else {
+      console.log("this is result", courseResult);
+      res.status(200).json(courseResult);
+    }
+  });
+});
+
+/* --------------------> Get courses for a particular skill <-------------------- */
+app.post("/getcertifications", (req, res) => {
+  console.log("request body received ", req.body);
+  member.findOne({ email: req.body.email }, (err1, memberResults) => {
+    if (err1) {
+      res.status(400).json({ message: "Error in finding the email in member" });
+      console.log("error ", err1);
+    } else {
+      console.log("this is result", memberResults);
+      course.find(
+        { Careerpath: memberResults.Role },
+        "Certification",
+        (err2, courseResult) => {
+          if (err2) {
+            console.log("Error in finding the Skills", err2);
+            res.status(400).json({
+              message: "Error in finding the courses pertaining to CareerPath"
+            });
+          } else {
+            console.log("result", courseResult);
+            let certification = courseResult.map(e => e.Certification);
+            let othercertificates = certification.filter(
+              f => !memberResults.Certifications.includes(f)
+            );
+            let finalData = {
+              presentCert: memberResults.Certifications,
+              newCert: othercertificates
+            };
             res.status(200).send(finalData);
           }
         }

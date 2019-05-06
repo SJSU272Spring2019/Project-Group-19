@@ -1,0 +1,10 @@
+/* #sidebarcss {
+  margin-left: 100px;
+} */
+
+#layoutcontent {
+  padding: 10px 35px 24px;
+  margin: 10px -75px;
+  width: 1200px !important;
+  height: 720px;
+}

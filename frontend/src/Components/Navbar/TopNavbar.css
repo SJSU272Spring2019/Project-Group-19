@@ -1,0 +1,12 @@
+.navbarclass {
+  height: 40px !important;
+}
+
+#topnavbar {
+  text-align: right;
+  float: right;
+}
+
+#login{
+    float: right;
+}

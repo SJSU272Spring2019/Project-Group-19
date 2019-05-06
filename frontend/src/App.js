@@ -9,6 +9,9 @@ import Courses from "./Components/Courses/Courses";
 import Events from "./Components/Events/Events";
 import "antd/dist/antd.css";
 import "./App.css";
+import Trending from "./Components/Trending/trending"
+import linegraph from "./Components/Trending/line_graph"
+import line_graph from "./Components/Trending/crazyline"
 const { Header, Content, Sider } = Layout;
 
 class App extends Component {
@@ -32,6 +35,9 @@ class App extends Component {
                     <Route path="/courses" component={Courses} />
                     <Route path="/events" component={Events} />
                     <Route path="/certification" component={Certification} />
+                    <Route path="/Trending" component={Trending}/>
+                    <Route path="/Line" component={linegraph}/> 
+                    <Route path="/line_graph" component ={line_graph}/>
                   </Switch>
                 </Layout>
               </div>

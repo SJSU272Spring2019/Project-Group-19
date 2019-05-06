@@ -67,6 +67,16 @@ app.post("/register", (req, res) => {
     Certifications: req.body.Certifications
   });
 
+    console.log("Inside Backend jobsvscount");
+    var m = new member({
+      email: req.body.email,
+      Role: req.body.Role,
+      Experience: req.body.Experience,
+      Skills: req.body.Skills,
+      Certifications: req.body.Certifications
+    });
+  
+
   m.save(function(err, result) {
     console.log("inside save member");
     if (err) {
@@ -122,3 +132,18 @@ app.get("/getalldata", async (req, res) => {
 });
 
 /* --------------------> Create a user with details <-------------------- */
+
+app.get("/jobsvscount", async (req, res) => {
+  var agg = [
+    {$group: {
+      _id: "$Role",
+      total: {$sum: 1}
+    }}
+  ];
+logs =  await   member.aggregate(agg);
+if(!!logs && logs.length){
+  res.json(logs).status(200);
+    console.log(logs);
+}
+
+  })

@@ -204,7 +204,7 @@ app.post("/getcourseforskill", (req, res) => {
   });
 });
 
-/* --------------------> Get courses for a particular skill <-------------------- */
+/* --------------------> Get certification for a particular career path <-------------------- */
 app.post("/getcertifications", (req, res) => {
   console.log("request body received ", req.body);
   member.findOne({ email: req.body.email }, (err1, memberResults) => {

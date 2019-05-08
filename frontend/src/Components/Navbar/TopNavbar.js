@@ -13,7 +13,10 @@ class TopNavbar extends Component {
           selectedKeys={[this.state.current]}
           mode="horizontal"
           theme="dark"
-        >
+        ><Menu.Item >
+        <img id="logo" src="http://clipart-library.com/data_images/487273.png"/>
+        
+        </Menu.Item>
           <Menu.Item key="title" id="title">
             <h5 style={{ color: "white" }}>
               For you to become {getRole() || ""}{" "}

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Graph from "../Graph/Graphs";
+import "./Trending.css"
 
 class Trending extends Component {
   state = {};
@@ -9,7 +10,10 @@ class Trending extends Component {
         <div className="col-lg-8">
           <Graph style={{ height: "500px" }} />
         </div>
-        <div className="col-lg-4">Hello</div>
+        <div className="col-lg-4" >
+        <iFrame id="chatbot" src="http://localhost:3001/" />
+        
+        </div>
       </div>
     );
   }

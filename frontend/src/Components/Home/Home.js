@@ -7,8 +7,8 @@ import {
   TreeSelect,
   Icon,
   Tooltip,
-  Popover,
-  Button
+  Button,
+  notification
 } from "antd";
 import { Input } from "antd";
 import _ from "lodash";
@@ -18,13 +18,12 @@ var setRole = require("../Localstorage").setRole;
 const Option = Select.Option;
 const TreeNode = TreeSelect.TreeNode;
 
-let isDisabled = true;
-
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      details: {}
+      details: {},
+      isDisabled: true
     };
     this.onChangeGoal = this.onChangeGoal.bind(this);
     this.onChangeSkills = this.onChangeSkills.bind(this);
@@ -82,19 +81,27 @@ class Home extends Component {
   };
 
   handleChangeEmail = e => {
-    isDisabled = false;
     let email = e.target.value;
     if (email.match(/\w+@\w+([.-]?\w+)*\.(edu|com)/gi)) {
       console.log("entered right email", email);
       this.setState({ email: email });
+      console.log("THIS IS DATA", this.state.details);
+      if (
+        this.state.role === "" ||
+        this.state.experience === "" ||
+        this.state.skills === "" ||
+        this.state.certification === ""
+      ) {
+        this.setState({ isDisabled: true });
+      } else {
+        this.setState({ isDisabled: false });
+      }
     } else {
       console.log("wrong email");
       alert("Enter valid Email");
     }
   };
 
-
-  
   handleSubmit = e => {
     e.preventDefault();
     let userDetails = {
@@ -104,6 +111,7 @@ class Home extends Component {
       Skills: this.state.skills,
       Certifications: this.state.certification
     };
+
     console.log("this is final data", userDetails);
     Axios.post(window.base_url + "/register", userDetails).then(response => {
       setEmail(response.data.email);
@@ -112,13 +120,8 @@ class Home extends Component {
     });
   };
 
-  content = () => (
-    <div>
-      <p>All fields are mandatory</p>
-    </div>
-  );
-
   render() {
+    console.log("here is data", this.state.isDisabled);
     return (
       <div>
         <Carousel id="formselect">
@@ -215,18 +218,34 @@ class Home extends Component {
             </div>
           </div>
         </Carousel>
-        <Popover content={content} title="Title" trigger="hover">
-        <Button
-          className="button"
-          disabled={isDisabled}
-          onClick={this.handleSubmit}
-        >
-          Submit
-        </Button>
-        </Popover>
+        {this.state.isDisabled ? (
+          <Button
+            className="button"
+            onClick={() => openNotificationWithIcon("warning")}
+          >
+            Submit
+          </Button>
+        ) : (
+          <Button className="button" onClick={this.handleSubmit}>
+            Submit
+          </Button>
+        )}
       </div>
     );
   }
 }
+
+const content = (
+  <div>
+    <p>Please fill all the fields</p>
+  </div>
+);
+
+const openNotificationWithIcon = type => {
+  notification[type]({
+    message: "Mandatory Fields",
+    description: "Please fill all the fields"
+  });
+};
 
 export default Home;

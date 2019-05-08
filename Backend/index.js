@@ -6,6 +6,7 @@ const ObjectId = require("mongodb").ObjectID;
 var member = require("./models/members");
 var role = require("./models/careerPaths");
 var course = require("./models/courses");
+var event = require("./models/events");
 var mongoose = require("mongoose");
 
 const uri =
@@ -238,3 +239,69 @@ app.post("/getcertifications", (req, res) => {
     }
   });
 });
+
+/* --------------------> Get events for a particular skill <-------------------- */
+app.post("/getevents", (req, res) => {
+  console.log("request body received ", req.body);
+  member.findOne({ email: req.body.email }, (err1, memberResults) => {
+    if (err1) {
+      res.status(400).json({ message: "Error in finding the email in member" });
+      console.log("error ", err1);
+    } else {
+      console.log("this is result", memberResults);
+      event.find({}, (err2, eventResult) => {
+        if (err2) {
+          console.log("Error in finding the events", err2);
+          res.status(400).json({
+            message: "Error in finding the events pertaining to CareerPath"
+          });
+        } else {
+          console.log("result", eventResult);
+          var returnObj = {
+            role: memberResults.Role,
+            events: eventResult
+          };
+          res.status(200).send(returnObj);
+        }
+      });
+    }
+  });
+});
+app.get("/jobsvscount", async (req, res) => {
+  var agg = [
+    {
+      $group: {
+        _id: "$Role",
+        total: { $sum: 1 }
+      }
+    }
+  ];
+  logs = await member.aggregate(agg);
+  if (!!logs && logs.length) {
+    res.json(logs).status(200);
+    console.log(logs);
+  }
+});
+// /* --------------------> Get all events for a particular skill <-------------------- */
+// app.post("/getevents", (req, res) => {
+//   console.log("request body received ", req.body);
+//   member.findOne({ email: req.body.email }, (err1, memberResults) => {
+//     if (err1) {
+//       res.status(400).json({ message: "Error in finding the email in member" });
+//       console.log("error ", err1);
+//     } else {
+//       console.log("this is result", memberResults);
+//       event.find({ CareerPath: memberResults.Role }, (err2, eventResult) => {
+//         if (err2) {
+//           console.log("Error in finding the events", err2);
+//           res.status(400).json({
+//             message: "Error in finding the events pertaining to CareerPath"
+//           });
+//         } else {
+//           console.log("result", eventResult);
+//           res.status(200).send(eventResult);
+//         }
+//       });
+//     }
+//   });
+// });

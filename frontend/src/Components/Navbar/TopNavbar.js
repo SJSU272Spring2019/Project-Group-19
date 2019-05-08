@@ -15,12 +15,9 @@ class TopNavbar extends Component {
           theme="dark"
         >
           <Menu.Item key="title" id="title">
-            <h5 style={{ color: "white" }}>For you to become {getRole() || ""} </h5>
-          </Menu.Item>
-
-          <Menu.Item key="login" id="login">
-          <Icon type="logout" />
-            Google Login
+            <h5 style={{ color: "white" }}>
+              For you to become {getRole() || ""}{" "}
+            </h5>
           </Menu.Item>
         </Menu>
       </div>

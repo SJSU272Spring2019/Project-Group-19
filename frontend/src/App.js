@@ -9,6 +9,7 @@ import Courses from "./Components/Courses/Courses";
 import Events from "./Components/Events/Events";
 import Skills from "./Components/Skills/Skills";
 import SkillCourses from "./Components/Courses/SkillCourses";
+import Trending from "./Components/Trending/Trending";
 import "antd/dist/antd.css";
 import "./App.css";
 const { Header, Content, Sider } = Layout;
@@ -36,6 +37,7 @@ class App extends Component {
                     <Route path="/events" component={Events} />
                     <Route path="/certification" component={Certification} />
                     <Route path="/skills" component={Skills} />
+                    <Route path="/trending" component={Trending} />
                   </Switch>
                 </Layout>
               </div>

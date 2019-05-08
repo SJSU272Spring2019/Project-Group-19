@@ -31,10 +31,16 @@
   /* font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif; */
 }
 
-#submitbutton {
-  background: #112231;
-  margin: 30px;
-  margin-left: 515px;
+
+
+
+
+.button{
+  margin: 30px auto;
+  margin-left: 520px;
+  background: #112231 !important;
+  color: white !important;
+
 }
 
 #emailinput{

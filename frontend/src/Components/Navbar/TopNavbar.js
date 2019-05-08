@@ -19,7 +19,7 @@ class TopNavbar extends Component {
           </Menu.Item>
 
           <Menu.Item key="login" id="login">
-            <Icon type="google" />
+          <Icon type="logout" />
             Google Login
           </Menu.Item>
         </Menu>

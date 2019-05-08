@@ -15,5 +15,5 @@ module.exports.setRole = role => {
 };
 
 module.exports.getRole = () => {
-  return JSON.parse(localStorage.getItem("career"));
+  return localStorage.getItem("career");
 };

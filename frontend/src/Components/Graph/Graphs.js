@@ -37,7 +37,7 @@ class line_graph extends Component{
       componentDidMount() {
         console.log("entered component didmount linegraph")
         // axios.defaults.withCredentials = true;
-        axios.get("http://localhost:8000/jobsvscount")
+        axios.get(window.base_url+"/jobsvscount")
           .then((response) => {
 
             console.log("after then console log linegraph", response.status);

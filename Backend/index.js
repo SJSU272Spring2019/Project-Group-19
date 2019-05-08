@@ -22,7 +22,7 @@ const options = {
 var app = Express();
 
 app.use(BodyParser.json());
-app.use(cors());
+app.use(cors({origin:"http://18.191.227.210:3000",credentials:true}));
 app.use(BodyParser.urlencoded({ extended: true }));
 mongoose.connect(uri, { useNewUrlParser: true });
 mongoose.set("useCreateIndex", true);
@@ -32,22 +32,17 @@ db.once("open", function() {
   console.log("Mongodb Connection created");
 });
 
-//use cors to allow cross origin resource sharing
-app.use(function(req, res, next) {
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET,HEAD,OPTIONS,POST,PUT,DELETE"
-  );
-  res.header("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
-  );
-  res.setHeader("Cache-Control", "no-cache");
-  next();
-});
+//use cors to allow cross origin resource shari
 
+
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', 'http://18.191.227.210:3000');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
+    res.setHeader('Cache-Control', 'no-cache');
+    next();
+});
 var port = 8000;
 app.listen(port, () => {
   console.log("Listening at ", port);
@@ -98,7 +93,8 @@ app.post("/find", (req, res) => {
 
 /* --------------------> Find All career path <-------------------- */
 app.get("/getalldata", async (req, res) => {
-  let returnData = {
+console.log("entered into getalldata");
+	let returnData = {
     roles: [],
     skills: [],
     certification: [],
